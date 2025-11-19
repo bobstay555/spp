@@ -4,19 +4,35 @@ import { useState, useRef, useEffect, useCallback, FC } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 
+// ----------------------------------------
+// GALLERY IMAGES (replace with your 20 webp)
+// ----------------------------------------
 const galleryImages = [
-  "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0433b27c-cec6-447f-a41b-c188b56113bd-landonorris-com/assets/images/68302baa04b14a1ca33c0b25_ln-home-horiz-1-6.webp",
-  "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0433b27c-cec6-447f-a41b-c188b56113bd-landonorris-com/assets/images/68302baab12220595c8223b3_ln-home-horiz-2-7.webp",
-  "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0433b27c-cec6-447f-a41b-c188b56113bd-landonorris-com/assets/images/68302babcf12f0111d96322e_ln-home-horiz-3-8.webp",
-  "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0433b27c-cec6-447f-a41b-c188b56113bd-landonorris-com/assets/images/68302baa798e2cc6e02ac38a_ln-home-horiz-4-9.webp",
-  "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0433b27c-cec6-447f-a41b-c188b56113bd-landonorris-com/assets/images/68da85d632bfefc552a0faac_Britain-25_20_1_-10.webp",
-  "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0433b27c-cec6-447f-a41b-c188b56113bd-landonorris-com/assets/images/68302baa14a96f3cdd2f9a95_ln-home-horiz-6-11.webp",
-  "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0433b27c-cec6-447f-a41b-c188b56113bd-landonorris-com/assets/images/68302bab3ee6e26b1f434a7d_ln-home-horiz-7-12.webp",
-  "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0433b27c-cec6-447f-a41b-c188b56113bd-landonorris-com/assets/images/68302baaedf821dd2e3a7c74_ln-home-horiz-8-13.webp",
-  "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0433b27c-cec6-447f-a41b-c188b56113bd-landonorris-com/assets/images/68302babb87c5f19ec131093_ln-home-horiz-9-15.webp",
-  "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/0433b27c-cec6-447f-a41b-c188b56113bd-landonorris-com/assets/images/68302bab4f762cdbc5e93415_ln-home-horiz-10-16.webp",
+  "/gallery/1.webp",
+  "/gallery/2.webp",
+  "/gallery/3.webp",
+  "/gallery/4.webp",
+  "/gallery/5.webp",
+  "/gallery/6.webp",
+  "/gallery/7.webp",
+  "/gallery/8.webp",
+  "/gallery/9.webp",
+  "/gallery/10.webp",
+  "/gallery/11.webp",
+  "/gallery/12.webp",
+  "/gallery/13.webp",
+  "/gallery/14.webp",
+  "/gallery/15.webp",
+  "/gallery/16.webp",
+  "/gallery/17.webp",
+  "/gallery/18.webp",
+  "/gallery/19.webp",
+  "/gallery/20.webp",
 ];
 
+// ----------------------------------------
+// IMAGE CARD
+// ----------------------------------------
 interface ImageCardProps {
   src: string;
   index: number;
@@ -25,6 +41,7 @@ interface ImageCardProps {
 
 const ImageCard: FC<ImageCardProps> = ({ src, index, containerRef }) => {
   const cardRef = useRef<HTMLDivElement>(null);
+
   const { scrollXProgress } = useScroll({
     target: cardRef,
     container: containerRef,
@@ -54,7 +71,7 @@ const ImageCard: FC<ImageCardProps> = ({ src, index, containerRef }) => {
         >
           <Image
             src={src}
-            alt={`Racing and lifestyle gallery image ${index + 1}`}
+            alt={`Gallery image ${index + 1}`}
             fill
             sizes="(max-width: 768px) 90vw, 600px"
             className="object-cover"
@@ -66,6 +83,9 @@ const ImageCard: FC<ImageCardProps> = ({ src, index, containerRef }) => {
   );
 };
 
+// ----------------------------------------
+// MAIN COMPONENT
+// ----------------------------------------
 const HorizontalGallery = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -75,14 +95,15 @@ const HorizontalGallery = () => {
     if (!container) return;
 
     const child = container.children[index] as HTMLElement;
-    if (child) {
-      const scrollTarget =
-        child.offsetLeft - (container.clientWidth - child.clientWidth) / 2;
-      container.scrollTo({
-        left: scrollTarget,
-        behavior: "smooth",
-      });
-    }
+    if (!child) return;
+
+    const scrollTarget =
+      child.offsetLeft - (container.clientWidth - child.clientWidth) / 2;
+
+    container.scrollTo({
+      left: scrollTarget,
+      behavior: "smooth",
+    });
   };
 
   const handleScroll = useCallback(() => {
@@ -96,49 +117,75 @@ const HorizontalGallery = () => {
     Array.from(container.children).forEach((child, index) => {
       const htmlChild = child as HTMLElement;
       const childCenter = htmlChild.offsetLeft + htmlChild.offsetWidth / 2;
-      const distance = Math.abs(scrollCenter - childCenter);
 
+      const distance = Math.abs(scrollCenter - childCenter);
       if (distance < smallestDistance) {
         smallestDistance = distance;
         closestIndex = index;
       }
     });
 
-    if (closestIndex !== -1) {
-      setActiveIndex(closestIndex);
-    }
+    if (closestIndex !== -1) setActiveIndex(closestIndex);
   }, []);
 
   useEffect(() => {
     const container = scrollRef.current;
-    if (container) {
-      container.addEventListener("scroll", handleScroll, { passive: true });
-      handleScroll();
-      return () => container.removeEventListener("scroll", handleScroll);
-    }
+    if (!container) return;
+
+    container.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => container.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
   return (
-    <section className="bg-background py-20 lg:py-32">
-      <style>{`.scrollbar-hide::-webkit-scrollbar { display: none; } .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }`}</style>
+    <section
+      id="gallery-section"
+      className="
+        bg-background min-h-screen
+        py-20 lg:py-32
+        snap-start
+        opacity-0 translate-y-20
+        transition-all duration-[1200ms]
+        ease-[cubic-bezier(0.16,1,0.3,1)]
+      "
+    >
+      {/* hide scrollbar */}
+      <style>{`
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+      `}</style>
+
+      {/* Horizontal Scroll Container */}
       <div
         ref={scrollRef}
-        className="scrollbar-hide flex items-center gap-8 overflow-x-auto snap-x snap-mandatory scroll-smooth py-4 px-[calc((100vw-90vw)/2)] md:px-[calc((100vw-600px)/2)]"
+        className="
+          scrollbar-hide flex items-center gap-8 
+          overflow-x-auto snap-x snap-mandatory scroll-smooth
+          py-4 
+          px-[calc((100vw-90vw)/2)] 
+          md:px-[calc((100vw-600px)/2)]
+        "
       >
         {galleryImages.map((src, index) => (
-          <ImageCard key={src} src={src} index={index} containerRef={scrollRef} />
+          <ImageCard
+            key={src}
+            src={src}
+            index={index}
+            containerRef={scrollRef}
+          />
         ))}
       </div>
+
+      {/* Dots navigation */}
       <div className="mt-8 flex justify-center gap-3">
         {galleryImages.map((_, index) => (
           <button
             key={index}
             onClick={() => handleDotClick(index)}
-            aria-label={`Go to image ${index + 1}`}
+            aria-label={`View image ${index + 1}`}
             className={`h-2 w-2 rounded-full transition-colors duration-300 ${
-              activeIndex === index
-                ? "bg-primary"
-                : "bg-muted hover:bg-muted-foreground/50"
+              activeIndex === index ? "bg-primary" : "bg-muted hover:bg-muted-foreground/50"
             }`}
           />
         ))}

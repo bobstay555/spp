@@ -5,7 +5,6 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  /* Shadcn/UI colors - Dark theme */
   --color-background: #282C20;
   --color-foreground: #FFFFFF;
 
@@ -27,20 +26,20 @@
   --color-accent: #CDFF00;
   --color-accent-foreground: #1A1D16;
 
-  --color-destructive: #ef4444; /* Keeping default for now, no specific destructive color in HLD */
-  --color-destructive-foreground: #fafafa; /* Keeping default for now */
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #fafafa;
 
   --color-border: rgba(255, 255, 255, 0.1);
   --color-input: #2A2E22;
-  --color-ring: #CDFF00; /* Using accent for ring */
+  --color-ring: #CDFF00;
 
-  --color-chart-1: #e67e22; /* Keeping default for now */
-  --color-chart-2: #2d8659; /* Keeping default for now */
-  --color-chart-3: #1e3a5f; /* Keeping default for now */
-  --color-chart-4: #f1c40f; /* Keeping default for now */
-  --color-chart-5: #e74c3c; /* Keeping default for now */
+  --color-chart-1: #e67e22;
+  --color-chart-2: #2d8659;
+  --color-chart-3: #1e3a5f;
+  --color-chart-4: #f1c40f;
+  --color-chart-5: #e74c3c;
 
-  --color-sidebar: #1A1D16; /* Assuming sidebar is a card-like element */
+  --color-sidebar: #1A1D16;
   --color-sidebar-foreground: #FFFFFF;
   --color-sidebar-primary: #CDFF00;
   --color-sidebar-primary-foreground: #1A1D16;
@@ -49,9 +48,9 @@
   --color-sidebar-border: rgba(255, 255, 255, 0.1);
   --color-sidebar-ring: #CDFF00;
 
-  --radius-lg: 1rem; /* 16px */
-  --radius-md: 0.75rem; /* 12px */
-  --radius-sm: 0.5rem; /* 8px */
+  --radius-lg: 1rem;
+  --radius-md: 0.75rem;
+  --radius-sm: 0.5rem;
 
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
@@ -73,7 +72,6 @@
     }
   }
 
-  /* Additional Design System Colors */
   --color-primary-background: #282C20;
   --color-secondary-background: #2A2E22;
   --color-accent-primary: #CDFF00;
@@ -85,20 +83,11 @@
   --color-card-background: #1A1D16;
   --color-overlay-dark: rgba(0, 0, 0, 0.6);
 
-  /* Font Families */
   --font-display: "Inter", sans-serif;
   --font-accent: "Baskervville", serif;
   --font-body: "Inter", sans-serif;
 }
 
-/*
-  The default border color has changed to currentColor in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
 @layer base {
   *,
   ::after,
@@ -117,7 +106,6 @@
 
 @layer base {
   :root {
-    /* Shadcn/UI CSS Variables - Dark theme */
     --background: var(--color-background);
     --foreground: var(--color-foreground);
     --card: var(--color-card);
@@ -137,12 +125,15 @@
     --border: var(--color-border);
     --input: var(--color-input);
     --ring: var(--color-ring);
+
     --chart-1: var(--color-chart-1);
     --chart-2: var(--color-chart-2);
     --chart-3: var(--color-chart-3);
     --chart-4: var(--color-chart-4);
     --chart-5: var(--color-chart-5);
-    --radius: var(--radius-md); /* Default radius for shadcn components */
+
+    --radius: var(--radius-md);
+
     --sidebar-background: var(--color-sidebar);
     --sidebar-foreground: var(--color-sidebar-foreground);
     --sidebar-primary: var(--color-sidebar-primary);
@@ -152,8 +143,6 @@
     --sidebar-border: var(--color-sidebar-border);
     --sidebar-ring: var(--color-sidebar-ring);
   }
-
-  /* No .dark block as the theme is dark by default */
 
   * {
     border-color: var(--border);
@@ -173,70 +162,72 @@
     letter-spacing: -0.01em;
   }
 
-  h1 {
-    font-size: 4.5rem; /* ~72px, for large titles */
-    font-weight: 800;
-  }
-
-  h2 {
-    font-size: 3rem; /* 48px */
-    font-weight: 700;
-  }
-
-  h3 {
-    font-size: 2rem; /* 32px */
-    font-weight: 600;
-  }
+  h1 { font-size: 4.5rem; font-weight: 800; }
+  h2 { font-size: 3rem; font-weight: 700; }
+  h3 { font-size: 2rem; font-weight: 600; }
 
   p {
-    font-size: 1rem; /* 16px */
+    font-size: 1rem;
     color: var(--color-text-secondary);
   }
 
   a {
     color: var(--color-accent-primary);
-    text-decoration: none;
   }
 
-  a:hover {
-    text-decoration: underline;
-  }
+  a:hover { text-decoration: underline; }
 
-  .text-display {
-    font-family: var(--font-display);
-  }
-
-  .text-accent-font {
-    font-family: var(--font-accent);
-  }
-
-  .text-body {
-    font-family: var(--font-body);
-  }
+  .text-display { font-family: var(--font-display); }
+  .text-accent-font { font-family: var(--font-accent); }
+  .text-body { font-family: var(--font-body); }
 
   .container {
     max-width: 1280px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 24px;
-    padding-right: 24px;
+    margin: auto;
+    padding-inline: 24px;
   }
 
   @media (min-width: 768px) {
-    .container {
-      padding-left: 48px;
-      padding-right: 48px;
-    }
+    .container { padding-inline: 48px; }
   }
 
   @media (min-width: 1024px) {
-    .container {
-      max-width: 1440px;
-    }
+    .container { max-width: 1440px; }
   }
 }
 
-/* Hide Next.js error overlay portal */
+/* Hide Next.js error overlay */
 nextjs-portal {
   display: none !important;
+}
+
+/* ======================================================== */
+/* 🚨 CAMERA FLASH ANIMATION — ALWAYS FLASHING 🔥          */
+/* ======================================================== */
+
+@keyframes cameraFlash {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  20% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  40% {
+    opacity: 0.5;
+    transform: scale(1.4);
+  }
+  60% {
+    opacity: 0;
+    transform: scale(1.8);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+
+.animate-cameraFlash {
+  animation: cameraFlash 1.8s infinite ease-out;
 }

@@ -1,6 +1,7 @@
 import Navigation from "@/components/sections/navigation";
 import Hero from "@/components/sections/hero";
-import HeroMarquee from "@/components/sections/hero-marquee";
+import HeroMarqueeCamera from "@/components/sections/hero-marquee-camera";
+
 import MissionStatement from "@/components/sections/mission-statement";
 import HorizontalGallery from "@/components/sections/horizontal-gallery";
 import HelmetShowcase from "@/components/sections/helmet-showcase";
@@ -14,20 +15,47 @@ import Footer from "@/components/sections/footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background scroll-smooth">
+
+      {/* 🔥 NAVIGATION */}
       <Navigation />
-      <Hero />
-      <HeroMarquee />
-      <MissionStatement />
-      <HorizontalGallery />
-      <HelmetShowcase />
-      <HelmetGrid />
-      <HelmetCta />
-      <LN4RacingPromo />
-      <PartnershipsIntro />
-      <PartnershipsLogos />
-      <SocialFeed />
-      <Footer />
+
+      {/* 🔥 HERO SECTION */}
+      <section id="home">
+        <Hero />
+        <HeroMarqueeCamera />
+      </section>
+
+      {/* 🔥 ABOUT / MISSION SECTION */}
+      <section id="about">
+        <MissionStatement />
+      </section>
+
+      {/* 🔥 PORTFOLIO GALLERY SECTION */}
+      <section id="portfolio">
+        <HorizontalGallery />
+        <HelmetShowcase />
+        <HelmetGrid />
+        <HelmetCta />
+      </section>
+
+      {/* 🔥 SERVICES SECTION */}
+      <section id="services">
+        <LN4RacingPromo />
+        <PartnershipsIntro />
+        <PartnershipsLogos />
+      </section>
+
+      {/* 🔥 SOCIAL SECTION */}
+      <section id="social">
+        <SocialFeed />
+      </section>
+
+      {/* 🔥 CONTACT SECTION */}
+      <section id="contact">
+        <Footer />
+      </section>
+
     </main>
   );
 }
