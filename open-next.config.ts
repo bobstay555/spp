@@ -1,12 +1,13 @@
-export default {
+import type { OpenNextConfig } from "@opennextjs/cloudflare";
+
+const config: OpenNextConfig = {
   cloudflare: {
-    // required for Cloudflare Pages
     outputDir: ".open-next",
   },
-
-  // optional, but recommended for performance
   nextjs: {
     disableESLint: true,
     disableTypeScript: true,
   },
 };
+
+export default config;
