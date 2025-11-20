@@ -1,12 +1,13 @@
 import type { OpenNextConfig } from "@opennextjs/cloudflare";
 
 const config: OpenNextConfig = {
-  cloudflare: {
-    outputDir: ".open-next",
-  },
   nextjs: {
+    // do not run eslint/typescript in production build
     disableESLint: true,
     disableTypeScript: true,
+  },
+  cloudflare: {
+    outputDir: ".open-next",
   },
 };
 
