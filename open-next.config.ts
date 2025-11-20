@@ -1,5 +1,6 @@
-﻿/** OpenNext Cloudflare config (CommonJS) */
-const config = {
+﻿import type { OpenNextConfig } from "@opennextjs/cloudflare";
+
+const config: OpenNextConfig = {
   nextjs: {
     disableESLint: true,
     disableTypeScript: true,
@@ -9,4 +10,4 @@ const config = {
   },
 };
 
-module.exports = config;
+export default config;
