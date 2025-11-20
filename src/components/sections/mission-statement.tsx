@@ -1,100 +1,119 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import Lenis from "@studio-freight/lenis";
 
-// Placeholder icon kept as-is, only labeling changed later
 const McLarenF1BadgeIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 92 56" fill="currentColor" {...props}>
-    <path d="M53,27.9c-0.2,0-0.4-0.1-0.6-0.2c-0.3-0.2-0.6-0.7-0.6-1.2c0-0.5,0.2-0.9,0.5-1.2c0.2-0.2,0.4-0.3,0.6-0.3H54h0.1c0.4,0,0.8,0.2,1,0.6
-    ... (UNCHANGED ICON PATHS) ...
-    "/>
+    <path d="..." />
   </svg>
 );
 
 const MissionStatement = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const lineRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
+  const lines = [
+    <>
+      CAPTURING{" "}
+      <span className="synthetic-text synthetic-metal">MOMENTS</span>,
+    </>,
 
-  const lineVariants = {
-    hidden: { opacity: 0, y: "100%" },
-    visible: {
-      opacity: 1,
-      y: "0%",
-      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
-    },
-  };
+    <>
+      PRESERVING{" "}
+      <span className="synthetic-text synthetic-glass">MEMORIES</span>,
+    </>,
+
+    <>
+      CREATING <span className="synthetic-text synthetic-plastic">STORIES</span>{" "}
+      THAT LAST
+    </>,
+
+    <>PHOTOGRAPHY THAT SPEAKS</>,
+
+    <>EMOTION, BEAUTY & TRUTH.</>,
+
+    <>
+      THIS IS <span className="synthetic-text synthetic-metal">SMILE PIC</span>.
+    </>,
+  ];
+
+  lineRefs.current = [];
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smooth: true,
+    });
+
+    function raf(time: number) {
+      lenis.raf(time);
+
+      const vh = window.innerHeight;
+
+      lineRefs.current.forEach((el, idx) => {
+        if (!el) return;
+
+        const rect = el.getBoundingClientRect();
+        const center = rect.top + rect.height / 2;
+        const dist = center - vh / 2;
+
+        const base = 0.03;
+        const speed = base + idx * 0.01;
+
+        el.style.transform = `translate3d(0, ${-dist * speed}px, 0)`;
+      });
+
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => lenis.destroy();
+  }, []);
 
   return (
-    <section className="bg-primary-background text-text-secondary py-16 lg:py-32 snap-start h-screen">
-      <div className="container mx-auto px-6 md:px-12 max-w-[1400px]">
-        <div className="flex flex-col items-center text-center">
-          
-          {/* icon and label */}
-          <div className="mb-8 flex flex-col items-center">
-            <McLarenF1BadgeIcon className="h-14 w-auto mb-4 text-text-secondary/80" />
-            <p className="text-xs uppercase tracking-wider font-medium text-text-tertiary">
-              SMILE PIC PHOTOGRAPHY • SINCE 2020
-            </p>
-          </div>
-
-          {/* main animated heading */}
-          <motion.h2
-            ref={ref}
-            variants={containerVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            className="font-body text-4xl lg:text-[6rem] leading-tight font-bold"
-          >
-            
-            <div className="overflow-hidden py-1">
-              <motion.div variants={lineVariants}>
-                CAPTURING <span className="text-primary font-accent">MOMENTS</span>,
-              </motion.div>
-            </div>
-
-            <div className="overflow-hidden py-1">
-              <motion.div variants={lineVariants}>
-                PRESERVING <span className="text-primary font-accent">MEMORIES</span>,
-              </motion.div>
-            </div>
-
-            <div className="overflow-hidden py-1">
-              <motion.div variants={lineVariants}>
-                CREATING STORIES THAT LAST
-              </motion.div>
-            </div>
-
-            <div className="overflow-hidden py-1">
-              <motion.div variants={lineVariants}>
-                PHOTOGRAPHY THAT SPEAKS
-              </motion.div>
-            </div>
-
-            <div className="overflow-hidden py-1">
-              <motion.div variants={lineVariants}>
-                EMOTION, BEAUTY & TRUTH.
-              </motion.div>
-            </div>
-
-            <div className="overflow-hidden py-1">
-              <motion.div variants={lineVariants}>
-                THIS IS <span className="text-primary font-accent">SMILE PIC</span>.
-              </motion.div>
-            </div>
-
-          </motion.h2>
+    <section className="bg-primary-background text-text-secondary min-h-[220vh] py-16 lg:py-32">
+      <div
+        className="container mx-auto px-6 md:px-12 max-w-[1400px]"
+        ref={containerRef}
+      >
+        {/* TOP ICON + LABEL */}
+        <div className="flex flex-col items-center text-center mb-20">
+          <McLarenF1BadgeIcon className="h-14 w-auto mb-4 text-text-secondary/80" />
+          <p className="text-xs uppercase tracking-wider font-medium text-text-tertiary">
+            SMILE PIC PHOTOGRAPHY • SINCE 2020
+          </p>
         </div>
+
+        {/* MOVING TEXT LINES */}
+        <div className="flex flex-col gap-24 lg:gap-28">
+          {lines.map((line, i) => (
+            <div
+              key={i}
+              ref={(el) => (lineRefs.current[i] = el)}
+              className="overflow-visible will-change-transform"
+            >
+              <div className="font-body font-bold text-5xl md:text-[6rem] lg:text-[8rem] leading-[0.9] uppercase tracking-tight text-white">
+                {line}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom space so last lines scroll fully */}
+        <div className="h-[40vh]" />
+
+        {/* ✅ IMAGE ADDED BELOW — ONLY NEW PART */}
+        <div className="w-full flex justify-center mt-20">
+          <img
+            src="/hero.webp"
+            alt="Smile Pic"
+            className="w-full max-w-5xl object-cover rounded-lg"
+          />
+        </div>
+
       </div>
     </section>
   );

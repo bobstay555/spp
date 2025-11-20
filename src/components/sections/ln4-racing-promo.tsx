@@ -46,8 +46,8 @@ const LN4RacingPromo = () => {
               {/* Card 1 - Wedding */}
               <div className="w-40 sm:w-48 md:w-56 transition-transform duration-300 hover:scale-[1.04]">
                 <div className="rounded-2xl overflow-hidden shadow-2xl">
-                  <Image
-                    src="https://images.pexels.com/photos/1456613/pexels-photo-1456613.jpeg"
+                  <img
+                    src="/wedding.webp"
                     alt="Wedding Photography Showcase"
                     width={480}
                     height={600}
@@ -63,8 +63,8 @@ const LN4RacingPromo = () => {
                 style={{ transform: 'translateY(0.3em) rotate(2deg)' }}
               >
                 <div className="rounded-2xl overflow-hidden shadow-2xl">
-                  <Image
-                    src="https://images.pexels.com/photos/39691/family-pier-man-woman-39691.jpeg"
+                  <img
+                    src="/family.webp"
                     alt="Family Photography Showcase"
                     width={480}
                     height={600}
@@ -85,8 +85,8 @@ const LN4RacingPromo = () => {
                 style={{ transform: 'translateY(-0.4em) rotate(-3deg)' }}
               >
                 <div className="rounded-2xl overflow-hidden shadow-2xl">
-                  <Image
-                    src="https://images.pexels.com/photos/34788995/pexels-photo-34788995.jpeg"
+                  <img
+                    src="/portrait.webp"
                     alt="Portrait Photography Showcase"
                     width={480}
                     height={600}

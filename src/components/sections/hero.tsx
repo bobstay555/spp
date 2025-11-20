@@ -1,5 +1,6 @@
 "use client";
 
+
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -49,7 +50,6 @@ const NextRaceCard = () => (
           <div className="text-center text-[10px] uppercase font-medium leading-[1.3] tracking-[0.05em] text-muted-foreground">
             Smile Pic
             <br />
-            Photography
           </div>
         </div>
       </div>
@@ -97,20 +97,23 @@ export default function Hero() {
         <h2>Professional Photography Studio in Alangulam, Tenkasi</h2>
       </div>
 
-      {/* 🔥 Correct ID Added Here */}
       <section id="home" className="relative min-h-screen flex items-center justify-center w-full pb-20">
+
+        {/* ⭐ Neon 3D Wobbling Layered Text */}
+        <div className="hidden lg:block hero-3d-container">
+          <figure className="hero-3d-figure">
+            {Array.from({ length: 10 }).map((_, i) => (
+              <h1 key={i} className="hero-3d-text">
+                SMILE PIC
+              </h1>
+            ))}
+          </figure>
+        </div>
 
         <div className="relative w-full min-h-screen px-6 lg:px-16 flex items-center justify-center">
 
           <div className="relative w-full h-auto">
-            <div
-              className="hidden lg:flex flex-col items-center justify-center text-center font-display font-extrabold text-secondary-foreground/20 leading-[0.9] select-none"
-              style={{ fontSize: "min(18vw, 220px)" }}
-            >
-              <div>SMILE PIC</div>
-              <div></div>
-            </div>
-
+            {/* Mobile title */}
             <div className="lg:hidden text-center flex flex-col items-center">
               <Image
                 src="/mobile-title.webp"
@@ -130,10 +133,8 @@ export default function Hero() {
 
           <NextRaceCard />
           <TouchControls />
-
         </div>
       </section>
-
     </div>
   );
 }

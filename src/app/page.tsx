@@ -13,46 +13,73 @@ import PartnershipsLogos from "@/components/sections/partnerships-logos";
 import SocialFeed from "@/components/sections/social-feed";
 import Footer from "@/components/sections/footer";
 
+/* Existing splash cursor */
+import SplashCursorWrapper from "@/components/client/SplashCursorWrapper";
+
+/* ⭐ STEP 2 — IMPORT GSAP STACKED CARDS LOGIC ⭐ */
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-background scroll-smooth">
 
-      {/* 🔥 NAVIGATION */}
+      {/* GSAP stacked cards engine */}
+      
+
+      {/* NAVIGATION (not stacked) */}
       <Navigation />
 
-      {/* 🔥 HERO SECTION */}
-      <section id="home">
+      {/* CARD 1 */}
+      <section className="c-card relative" id="home">
+
+        {/* background */}
+        <div className="absolute inset-0 -z-10">
+          <SplashCursorWrapper
+            gradientColors={["#FF9FFC", "#5227FF"]}
+            angle={0}
+            noise={0.3}
+            blindCount={12}
+            blindMinWidth={50}
+            spotlightRadius={0.5}
+            spotlightSoftness={1}
+            spotlightOpacity={1}
+            mouseDampening={0.15}
+            distortAmount={0}
+            shineDirection="left"
+            mixBlendMode="lighten"
+          />
+        </div>
+
         <Hero />
         <HeroMarqueeCamera />
       </section>
 
-      {/* 🔥 ABOUT / MISSION SECTION */}
-      <section id="about">
+      {/* CARD 2 */}
+      <section className="c-card" id="about">
         <MissionStatement />
       </section>
 
-      {/* 🔥 PORTFOLIO GALLERY SECTION */}
-      <section id="portfolio">
+      {/* CARD 3 */}
+      <section className="c-card" id="portfolio">
         <HorizontalGallery />
         <HelmetShowcase />
         <HelmetGrid />
         <HelmetCta />
       </section>
 
-      {/* 🔥 SERVICES SECTION */}
-      <section id="services">
+      {/* CARD 4 */}
+      <section className="c-card" id="services">
         <LN4RacingPromo />
         <PartnershipsIntro />
         <PartnershipsLogos />
       </section>
 
-      {/* 🔥 SOCIAL SECTION */}
-      <section id="social">
+      {/* CARD 5 */}
+      <section className="c-card" id="social">
         <SocialFeed />
       </section>
 
-      {/* 🔥 CONTACT SECTION */}
-      <section id="contact">
+      {/* CARD 6 (FINAL CARD) */}
+      <section className="c-card" id="contact">
         <Footer />
       </section>
 

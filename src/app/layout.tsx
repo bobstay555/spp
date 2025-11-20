@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import SplashCursor from "@/components/SplashCursor";
+
 import "./globals.css";
 import VisualEditsMessenger from "../visual-edits/VisualEditsMessenger";
 import ErrorReporter from "@/components/ErrorReporter";
@@ -18,7 +20,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
+
+        {/* 🔥 GLOBAL FLUID CURSOR HERE */}
+        <SplashCursor />
+
         <ErrorReporter />
+
         <Script
           src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/scripts//route-messenger.js"
           strategy="afterInteractive"
@@ -27,9 +34,12 @@ export default function RootLayout({
           data-include-search-params="true"
           data-only-in-iframe="true"
           data-debug="true"
-          data-custom-data='{"appName": "YourApp", "version": "1.0.0", "greeting": "hi"}'
+          data-custom-data='{\"appName\": \"YourApp\", \"version\": \"1.0.0\", \"greeting\": \"hi\"}'
         />
+
+        {/* 🔥 YOUR WEBSITE CONTENT */}
         {children}
+
         <VisualEditsMessenger />
       </body>
     </html>
