@@ -1,11 +1,10 @@
-/** @type {import('@opennextjs/cloudflare').OpenNextConfig} */
-const config = {
-  // ... other configuration ...
-  
-  // This is the required section that cannot be empty.
-  config: {
-    default: {},
+﻿/** OpenNext config for Cloudflare Pages — CommonJS */
+module.exports = {
+  nextjs: {
+    disableESLint: true,
+    disableTypeScript: true,
+  },
+  cloudflare: {
+    outputDir: ".open-next",
   },
 };
-
-module.exports = config;
