@@ -1,8 +1,6 @@
-import type { OpenNextConfig } from "@opennextjs/cloudflare";
-
-const config: OpenNextConfig = {
+/** @type {import("@opennextjs/cloudflare").OpenNextConfig} */
+const config = {
   nextjs: {
-    // do not run eslint/typescript in production build
     disableESLint: true,
     disableTypeScript: true,
   },
