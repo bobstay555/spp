@@ -1,4 +1,4 @@
-/** OpenNext config */
+/** OpenNext Cloudflare config */
 const config = {
   nextjs: {
     disableESLint: true,
