@@ -1,12 +1,9 @@
-/** OpenNext Cloudflare config */
-const config = {
+export default {
   nextjs: {
     disableESLint: true,
     disableTypeScript: true,
   },
   cloudflare: {
     outputDir: ".open-next",
-  },
+  }
 };
-
-export default config;
